@@ -1,5 +1,5 @@
 <?php
-// Vehicle model
+// Classification model
 
 
 function regClassification($classificationName){
