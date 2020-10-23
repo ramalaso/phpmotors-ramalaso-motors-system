@@ -43,6 +43,9 @@ switch ($action) {
     case 'login':
         include 'view/login.php';
         break;
+    case 'vehicle':
+        include 'view/vehicle-man.php';
+        break;
     default:
         include 'view/home.php';
         break;
