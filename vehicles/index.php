@@ -59,6 +59,15 @@ require_once '../model/vehicle-model.php';
       // Check and report the result
       if($regOutcome === 1){
         $message = "<p>Thanks for registering $classificationName.</p>";
+        // Get the array of classifications
+        $classifications = getClassifications();
+        // Build a navigation bar using the $classifications array
+        $navList = '<ul>';
+        $navList .= "<li><a href='/index.php' title='View the PHP Motors home page'>Home</a></li>";
+        foreach ($classifications as $classification) {
+        $navList .= "<li><a href='/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
+        }
+        $navList .= '</ul>';
         include '../view/add-classification.php';
         exit;
       } else {
@@ -66,6 +75,8 @@ require_once '../model/vehicle-model.php';
         include '../view/add-classification.php';
         exit;
       }
+
+      
       break;
      case 'adding-vehicle':
          // Filter and store the data
@@ -100,7 +111,7 @@ require_once '../model/vehicle-model.php';
         }
         break;
     case 'vehicle':
-        include '../view/vehicle.php';
+        include '../view/vehicle-man.php';
         break;
      default:
         include '../view/home.php';

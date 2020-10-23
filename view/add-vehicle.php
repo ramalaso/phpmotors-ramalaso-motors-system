@@ -29,9 +29,24 @@
                 <label for="invMake">Make</label>
                 <input type="text" id="invMake" placeholder="Enter first name" name="invMake">
             </div>
+            <?php
+                function createSelectBox(){
+                $classifications = getClassifications();
+                // Build a navigation bar using the $classifications array
+                    $options= '<select id= "invModel" name="invModel">';
+                    foreach ($classifications as $classification) {
+                        $options .= sprintf("<option value='%s'>%s</option>", $classification['classificationName'], $classification['classificationName']);
+                        }
+                    $options .= '</select>';
+                    return $options;
+                }
+            ?>
             <div class="form-control">
                 <label for= "invModel">Model</label>
-                <input type="text" id= "invModel" placeholder="Enter last name" name="invModel">
+                <?php
+                echo createSelectBox()
+                ?>
+                <!-- <input type="text" id= "invModel" placeholder="Enter last name" name="invModel"> -->
             </div>
             <div class="form-control">
                 <label for="invDescription">Description</label>
