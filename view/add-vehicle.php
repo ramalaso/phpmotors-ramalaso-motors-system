@@ -25,29 +25,34 @@
             echo $message;
             }
             ?>
-            <div class="form-control">
-                <label for="invMake">Make</label>
-                <input type="text" id="invMake" placeholder="Enter first name" name="invMake">
-            </div>
             <?php
                 function createSelectBox(){
                 $classifications = getClassifications();
                 // Build a navigation bar using the $classifications array
-                    $options= '<select id= "invModel" name="invModel">';
+                    $options= '<select id= "classificationId" name="classificationId">';
                     foreach ($classifications as $classification) {
-                        $options .= sprintf("<option value='%s'>%s</option>", $classification['classificationName'], $classification['classificationName']);
+                        $options .= sprintf("<option value='%s'>%s</option>", $classification['classificationId'], $classification['classificationName']);
                         }
                     $options .= '</select>';
                     return $options;
                 }
             ?>
             <div class="form-control">
-                <label for= "invModel">Model</label>
+                <label for= "classificationId">Classification</label>
                 <?php
                 echo createSelectBox()
                 ?>
                 <!-- <input type="text" id= "invModel" placeholder="Enter last name" name="invModel"> -->
             </div>
+            <div class="form-control">
+                <label for="invMake">Make</label>
+                <input type="text" id="invMake" placeholder="Enter first name" name="invMake">
+            </div>
+            <div class="form-control">
+                <label for="invModel">Model</label>
+                <input type="text" id="invModel" placeholder="Enter model" name="invModel">
+            </div>
+            
             <div class="form-control">
                 <label for="invDescription">Description</label>
                 <input type="text" id="invDescription" placeholder="Enter email" name="invDescription">
@@ -69,17 +74,10 @@
                 <input type="text" id="invStock" placeholder="Enter stock" name="invStock">
             </div>
             <div class="form-control">
-                <label for="invImage">Image</label>
-                <input type="text" id="invImage" placeholder="Enter image" name="invImage">
-            </div>
-            <div class="form-control">
                 <label for="invColor">Color</label>
                 <input type="text" id="invColor" placeholder="Enter color" name="invColor">
             </div>
-            <div class="form-control">
-                <label for="classificationId">Classificaction Id</label>
-                <input type="text" id="classificationId" placeholder="Enter classification id" name="classificationId">
-            </div>
+            
             <button type="submit" class="submit" id="regbtn">Add Vehicle</button>
             <input type="hidden" name="action" value="adding-vehicle">
         </form>
