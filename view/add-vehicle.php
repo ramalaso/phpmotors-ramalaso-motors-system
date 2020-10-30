@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+<?php
+    $classifList = '<select name="classificationId">';
+    foreach ($classifications as $classification) {
+        # code...
+        $classifList .= "<option value='$classification[classificationId]'";
+        if(isset($classificationId)){
+            if($classification['classificationId']===$classificationId){
+                $classifList .= ' selected ';
+            }
+        }
+        $classifList .= ">$classification[classificationName]</option>";
+    }
+    $classifList .= '</select>';
+?><!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,7 +29,6 @@
       <?php echo $navList; ?>
       </nav>
       <main>
-     
       <div class="containerLogin">
         <form id="form" class="form" action="/vehicles/index.php" method="POST">
             <h2>Add new vehicle</h2>
@@ -25,57 +37,45 @@
             echo $message;
             }
             ?>
-            <?php
-                function createSelectBox(){
-                $classifications = getClassifications();
-                // Build a navigation bar using the $classifications array
-                    $options= '<select id= "classificationId" name="classificationId">';
-                    foreach ($classifications as $classification) {
-                        $options .= sprintf("<option value='%s'>%s</option>", $classification['classificationId'], $classification['classificationName']);
-                        }
-                    $options .= '</select>';
-                    return $options;
-                }
-            ?>
             <div class="form-control">
                 <label for= "classificationId">Classification</label>
                 <?php
-                echo createSelectBox()
+                echo $classifList;
                 ?>
-                <!-- <input type="text" id= "invModel" placeholder="Enter last name" name="invModel"> -->
             </div>
             <div class="form-control">
                 <label for="invMake">Make</label>
-                <input type="text" id="invMake" placeholder="Enter first name" name="invMake" required>
+                <input type="text" id="invMake" placeholder="Enter make" name="invMake" 
+                <?php if(isset($invMake)){echo "value='$invMake'";} ?> required>
             </div>
             <div class="form-control">
                 <label for="invModel">Model</label>
-                <input type="text" id="invModel" placeholder="Enter model" name="invModel" required>
+                <input type="text" id="invModel" placeholder="Enter model" name="invModel"  <?php if(isset($invModel)){echo "value='$invModel'";} ?> required>
             </div>
             
             <div class="form-control">
                 <label for="invDescription">Description</label>
-                <input type="text" id="invDescription" placeholder="Enter email" name="invDescription" required>
+                <textarea type="text" id="invDescription" placeholder="Enter description" <?php if(isset($invDescription)){echo "value='$invDescription'";} ?> name="invDescription" required></textarea>
             </div>
             <div class="form-control">
                 <label for="invImage">Image</label>
-                <input type="text" id="invImage" placeholder="Enter image path" name="invImage" required>
+                <input type="text" id="invImage" placeholder="Enter image path" name="invImage"  <?php if(isset($invImage)){echo "value='$invImage'";} ?> required>
             </div>
             <div class="form-control">
                 <label for="invThumbnail">Thumbnail</label>
-                <input type="text" id="invThumbnail" placeholder="Enter password" name="invThumbnail" required>
+                <input type="text" id="invThumbnail" placeholder="Enter password" name="invThumbnail"  <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";} ?> required>
             </div>
             <div class="form-control">
                 <label for="invPrice">Price</label>
-                <input type="text" id="invPrice" placeholder="Enter price" name="invPrice" required>
+                <input type="text" id="invPrice" placeholder="Enter price" name="invPrice"  <?php if(isset($invPrice)){echo "value='$invPrice'";} ?>  required>
             </div>
             <div class="form-control">
                 <label for="invStock">Stock</label>
-                <input type="text" id="invStock" placeholder="Enter stock" name="invStock" required>
+                <input type="text" id="invStock" placeholder="Enter stock" name="invStock" <?php if(isset($invStock)){echo "value='$invStock'";} ?>  required>
             </div>
             <div class="form-control">
                 <label for="invColor">Color</label>
-                <input type="text" id="invColor" placeholder="Enter color" name="invColor" required>
+                <input type="text" id="invColor" placeholder="Enter color" name="invColor"  <?php if(isset($invColor)){echo "value='$invColor'";} ?> required>
             </div>
             
             <button type="submit" class="submit" id="regbtn">Add Vehicle</button>

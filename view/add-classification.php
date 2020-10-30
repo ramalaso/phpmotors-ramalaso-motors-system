@@ -27,7 +27,7 @@
             ?>
             <div class="form-control">
                 <label for="classificationName">First Name</label>
-                <input type="text" id="classificationName" placeholder="Add classification name" name="classificationName" required>
+                <input type="text" id="classificationName" placeholder="Add classification name" name="classificationName" <?php if(isset($classificationName)){echo "value='$classificationName'";} ?>  required>
             </div>
             <button type="submit" class="submit" id="regbtn">Add Classification</button>
             <input type="hidden" name="action" value="adding-classification">
