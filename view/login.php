@@ -20,13 +20,14 @@
         <form id="form" class="form">
             <h2>Login</h2>
             <div class="form-control">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter username">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter email" required>
                 <small>Error message</small>
             </div>
             <div class="form-control">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter password">
+                <input type="password" id="password" placeholder="Enter password" required  pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+                <span class="passwordLabel">Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
                 <small>Error message</small>
             </div>
             <button type="submit" class="submit">Submit</button>

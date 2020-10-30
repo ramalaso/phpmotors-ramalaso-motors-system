@@ -46,36 +46,36 @@
             </div>
             <div class="form-control">
                 <label for="invMake">Make</label>
-                <input type="text" id="invMake" placeholder="Enter first name" name="invMake">
+                <input type="text" id="invMake" placeholder="Enter first name" name="invMake" required>
             </div>
             <div class="form-control">
                 <label for="invModel">Model</label>
-                <input type="text" id="invModel" placeholder="Enter model" name="invModel">
+                <input type="text" id="invModel" placeholder="Enter model" name="invModel" required>
             </div>
             
             <div class="form-control">
                 <label for="invDescription">Description</label>
-                <input type="text" id="invDescription" placeholder="Enter email" name="invDescription">
+                <input type="text" id="invDescription" placeholder="Enter email" name="invDescription" required>
             </div>
             <div class="form-control">
                 <label for="invImage">Image</label>
-                <input type="text" id="invImage" placeholder="Enter image path" name="invImage">
+                <input type="text" id="invImage" placeholder="Enter image path" name="invImage" required>
             </div>
             <div class="form-control">
                 <label for="invThumbnail">Thumbnail</label>
-                <input type="text" id="invThumbnail" placeholder="Enter password" name="invThumbnail">
+                <input type="text" id="invThumbnail" placeholder="Enter password" name="invThumbnail" required>
             </div>
             <div class="form-control">
                 <label for="invPrice">Price</label>
-                <input type="text" id="invPrice" placeholder="Enter price" name="invPrice">
+                <input type="text" id="invPrice" placeholder="Enter price" name="invPrice" required>
             </div>
             <div class="form-control">
                 <label for="invStock">Stock</label>
-                <input type="text" id="invStock" placeholder="Enter stock" name="invStock">
+                <input type="text" id="invStock" placeholder="Enter stock" name="invStock" required>
             </div>
             <div class="form-control">
                 <label for="invColor">Color</label>
-                <input type="text" id="invColor" placeholder="Enter color" name="invColor">
+                <input type="text" id="invColor" placeholder="Enter color" name="invColor" required>
             </div>
             
             <button type="submit" class="submit" id="regbtn">Add Vehicle</button>
