@@ -1,7 +1,5 @@
 <?php
 // Accounts model
-
-
 function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword){
     // Create a connection object using the phpmotors connection function
     $db = phpmotorsConnect();
@@ -25,4 +23,20 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
     $stmt->closeCursor();
     // Return the indication of success (rows changed)
     return $rowsChanged;
+   }
+
+   //Checking existing email
+   function checkExistingEmail($clientEmail) {
+    $db =  phpmotorsConnect();
+    $sql = 'SELECT clientEmail FROM clients WHERE clientEmail = :email';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':email', $clientEmail, PDO::PARAM_STR);
+    $stmt->execute();
+    $matchEmail = $stmt->fetch(PDO::FETCH_NUM);
+    $stmt->closeCursor();
+    if(empty($matchEmail)){
+        return 0;
+    } else {
+        return 1;
+    }
    }
