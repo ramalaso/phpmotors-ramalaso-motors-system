@@ -5,9 +5,8 @@
  *********************************************/
 
 
-// define("__ROOT__", __DIR__ ."\\");
-// require_once __ROOT__ . 'library\connections.php';
-// require_once __ROOT__ . 'model\main_model.php';
+// Create or access a Session
+session_start();
 
 // Get the database connection file
  require_once 'library/connections.php';
@@ -30,11 +29,15 @@
 
 //  echo $navList;
 // exit;
-
 $action = filter_input(INPUT_POST, 'action');
+
 if($action == NULL) {
     $action = filter_input(INPUT_GET, 'action');
 }
+// Check if the firstname cookie exists, get its value
+if(isset($_COOKIE['firstname'])){
+    $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+   }
 
 switch ($action) {
     case 'template':

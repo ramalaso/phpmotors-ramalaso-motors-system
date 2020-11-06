@@ -3,9 +3,8 @@
  * Account  Controller
  *********************************************/
 
-// define("__ROOT__", __DIR__ ."\\");
-// require_once __ROOT__ . 'library\connections.php';
-// require_once __ROOT__ . 'model\main_model.php';
+// Create or access a Session
+session_start();
 
 // Get the database connection file
 require_once '../library/connections.php';
@@ -70,21 +69,77 @@ require_once '../library/functions.php';
         
         // Check and report the result
         if($regOutcome === 1){
-          $message = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
-          include '../view/login.php';
+          setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
+          $_SESSION['message'] = "Thanks for registering $clientFirstname. Please use your email and password to login.";
+          header('Location: /accounts/?action=login');
           exit;
         } else {
           $message = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
           include '../view/registration.php';
           exit;
         }
+
+        // // Check and report the result
+        // if ($regOutcome === 1) {
+        //   setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
+        //   $message = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
+        //   include '../view/login.php';
+        //   exit;
+        // }
         break;
-     case 'login':
+    case 'login':
          include '../view/login.php';
          break;
+    case 'Login2':
+      $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+      $clientEmail = checkEmail($clientEmail);
+      $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+      $passwordCheck = checkPassword($clientPassword);
+      
+      // Run basic checks, return if errors
+      if (empty($clientEmail) || empty($passwordCheck)) {
+       $message = '<p class="notice">Please provide a valid email address and password.</p>';
+       include '../view/login.php';
+       exit;
+      }
+        
+      // A valid password exists, proceed with the login process
+      // Query the client data based on the email address
+      $clientData = getClient($clientEmail);
+      // Compare the password just submitted against
+      // the hashed password for the matching client
+      $hashCheck = password_verify($clientPassword, $clientData['clientPassword']);
+      // If the hashes don't match create an error
+      // and return to the login view
+      if(!$hashCheck) {
+        $message = '<p class="notice">Please check your password and try again.</p>';
+        include '../view/login.php';
+        exit;
+      }
+      // A valid user exists, log them in
+      $_SESSION['loggedin'] = TRUE;
+      // Remove the password from the array
+      // the array_pop function removes the last
+      // element from an array
+      array_pop($clientData);
+      // Store the array into the session
+      $_SESSION['clientData'] = $clientData;
+      // Send them to the admin view
+      setcookie('firstname', $clientData['clientFirstname'], strtotime('+1 year'), '/');
+      include '../view/admin.php';
+      exit;
+        break;
     case 'registration':
         include '../view/registration.php';
         break;
+    case 'admin':
+        include '../view/admin.php';
+      break;
+    case 'logout':
+      session_destroy();
+      setcookie('firstname', '', strtotime('+1 year'), '/');
+      header('Location: /index.php');
+      break;
      default:
         include '../view/home.php';
         break;
