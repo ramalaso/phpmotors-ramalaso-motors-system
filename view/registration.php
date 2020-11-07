@@ -23,7 +23,7 @@
         <form id="form" class="form" action="/accounts/index.php" method="POST">
           <h2>Register with us</h2>
           <?php if (isset($message)) {
-            echo $message; } ?>
+            echo "<small>$message</small>" ; } ?>
           <div class="form-control">
             <label for="fName">First Name</label>
             <input type="text" id="fName" placeholder="Enter first name" name="clientFirstname" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";}  ?> required>

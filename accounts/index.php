@@ -79,13 +79,6 @@ require_once '../library/functions.php';
           exit;
         }
 
-        // // Check and report the result
-        // if ($regOutcome === 1) {
-        //   setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
-        //   $message = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
-        //   include '../view/login.php';
-        //   exit;
-        // }
         break;
     case 'login':
          include '../view/login.php';
@@ -99,6 +92,7 @@ require_once '../library/functions.php';
       // Run basic checks, return if errors
       if (empty($clientEmail) || empty($passwordCheck)) {
        $message = '<p class="notice">Please provide a valid email address and password.</p>';
+       $_SESSION['message'] = $message;
        include '../view/login.php';
        exit;
       }
@@ -108,11 +102,13 @@ require_once '../library/functions.php';
       $clientData = getClient($clientEmail);
       // Compare the password just submitted against
       // the hashed password for the matching client
+      
       $hashCheck = password_verify($clientPassword, $clientData['clientPassword']);
       // If the hashes don't match create an error
       // and return to the login view
       if(!$hashCheck) {
         $message = '<p class="notice">Please check your password and try again.</p>';
+        $_SESSION['message'] = $message;
         include '../view/login.php';
         exit;
       }
@@ -137,7 +133,6 @@ require_once '../library/functions.php';
       break;
     case 'logout':
       session_destroy();
-      setcookie('firstname', '', strtotime('+1 year'), '/');
       header('Location: /index.php');
       break;
      default:

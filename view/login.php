@@ -20,7 +20,7 @@
       <form id="form" class="form" action="/accounts/index.php" method="POST">
             <h2>Login</h2>
             <?php if (isset($_SESSION['message'])) {
-               echo $_SESSION['message'];
+               echo "<small>".$_SESSION['message']."</small>";
             } ?>
             <div class="form-control">
                 <label for="email">Email</label>

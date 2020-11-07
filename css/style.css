@@ -153,6 +153,12 @@ footer p {
   color: rgb(199, 47, 186);
 }
 
+small {
+  font-size: small;
+  color: red;
+  font-weight: bold;
+}
+
 @media screen and (min-width: 680px) {
   body {
     max-width: 960px;

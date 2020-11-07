@@ -36,12 +36,19 @@ require_once '../model/vehicle-model.php';
 
  switch ($action) {
     case 'add-classification':
-        // Filter and store the data
-          include '../view/add-classification.php';
-        break;
+      if (isset($_SESSION['loggedin']) && $_SESSION['clientData']['clientLevel']>1){
+        include '../view/add-classification.php';
+      } else {
+       header('Location: /index.php');
+      }
+      break;
     case 'add-vehicle':
-         include '../view/add-vehicle.php';
-         break;
+      if (isset($_SESSION['loggedin']) && $_SESSION['clientData']['clientLevel']>1){
+        include '../view/add-vehicle.php';
+      } else {
+       header('Location: /index.php');
+      }
+      break;
     case 'adding-classification':
         // Filter and store the data
         $classificationName = filter_input(INPUT_POST, 'classificationName', FILTER_SANITIZE_STRING);
@@ -110,8 +117,12 @@ require_once '../model/vehicle-model.php';
         }
         break;
     case 'vehicle':
+      if (isset($_SESSION['loggedin'])  && $_SESSION['clientData']['clientLevel']>1){
         include '../view/vehicle-man.php';
-        break;
+      } else {
+       header('Location: /index.php');
+      }
+      break;
      default:
         include '../view/home.php';
         break;
