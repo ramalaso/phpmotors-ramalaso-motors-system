@@ -131,6 +131,86 @@ require_once '../library/functions.php';
     case 'admin':
         include '../view/admin.php';
       break;
+    
+    case 'mod':
+      $clientId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+      $clientInfo = getInvItemInfo($clientId);
+      if(count($clientInfo)<1){
+        $message = 'Sorry, no client information could be found.';
+      }
+      include '../view/client-update.php';
+      exit;
+      break;
+    case 'updateAccount':
+      $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+      $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+      $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+      $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_STRING);
+
+      $checkEmail = checkEmail($clientEmail);
+
+      $existingEmail = checkExistingEmail($clientEmail);
+
+      // Run basic checks, return if errors
+      if (empty($checkEmail)) {
+        $message = '<p class="notice">Please provide a valid email address.</p>';
+        $_SESSION['message'] = $message;
+        include '../view/client-update.php';
+        exit;
+       }
+      // Check for existing email address in the table
+       // Check for existing email address in the table
+       if($existingEmail && $_SESSION['clientData']['clientEmail']!=$clientEmail){
+        $message = '<p class="notice">That email address already exists. Do you want to login instead?</p>';
+        include '../view/client-update.php';
+        exit;
+        }
+      $updateResult = updateAccount($clientId, $clientFirstname, $clientLastname, $clientEmail);
+      if ($updateResult) {
+        $message = "<p class='notify'>$clientFirstname $clientLastname account has been updated.</p>";
+        $_SESSION['message'] = $message;
+        $clientData = getClient($clientEmail);
+        $_SESSION['clientData'] = $clientData;
+        $clientInfo = getInvItemInfo($clientId);
+        include '../view/admin.php';
+        // header('location: /accounts/index.php?action=admin');
+        exit;
+        } else {
+        $message = "<p>Error. The client was not updated.</p>";
+        include '../view/client-update.php';
+        exit;
+      }
+      break;
+    case 'updatePassword':
+      $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+      $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_STRING);
+      $passwordCheck = checkPassword($clientPassword);
+
+      // Run basic checks, return if errors
+      if (empty($passwordCheck)) {
+        $message = '<p class="notice">Please provide a valid email address and password.</p>';
+        $_SESSION['message'] = $message;
+        include '../view/login.php';
+        exit;
+       }
+
+      $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+      $updateResult = updatePassword($clientId, $hashedPassword);
+      if ($updateResult) {
+        $clientInfo = getInvItemInfo($clientId);
+        $clientData = $clientInfo;
+        $_SESSION['clientData'] = $clientData;
+        $message = "<p class='notify'>".$_SESSION['clientData']['clientFirstname'].$_SESSION['clientData']['clientLastname']." password has been updated.</p>";
+        $_SESSION['message'] = $message;
+        include '../view/admin.php';
+        // header('location: /accounts/index.php?action=admin');
+        exit;
+        } else {
+        $message = "<p>Error. The client was not updated.</p>";
+        include '../view/client-update.php';
+        exit;
+      }
+      break;
     case 'logout':
       session_destroy();
       header('Location: /index.php');

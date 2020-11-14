@@ -52,3 +52,42 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
     $stmt->closeCursor();
     return $clientData;
    }
+
+// Get vehicle information by invId
+function getInvItemInfo($clientId){
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM clients WHERE clientId = :clientId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+    $stmt->execute();
+    $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $invInfo;
+   }
+
+   // Update account
+function updateAccount ($clientId, $clientFirstname, $clientLastname, $clientEmail) {
+    $db = phpmotorsConnect();
+    $sql = 'UPDATE clients SET clientFirstname = :clientFirstname, clientLastname = :clientLastname, clientEmail = :clientEmail WHERE clientId = :clientId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+    $stmt->bindValue(':clientFirstname', $clientFirstname, PDO::PARAM_STR);
+    $stmt->bindValue(':clientLastname', $clientLastname, PDO::PARAM_STR);
+    $stmt->bindValue(':clientEmail', $clientEmail, PDO::PARAM_STR);
+    $stmt->execute();
+    $rowsChanged = $stmt->rowCount();
+    $stmt->closeCursor();
+    return $rowsChanged;
+  }
+   // Update a vehicle
+function updatePassword ($clientId, $clientPassword ) {
+    $db = phpmotorsConnect();
+    $sql = 'UPDATE clients SET clientPassword = :clientPassword WHERE clientId = :clientId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+    $stmt->bindValue(':clientPassword', $clientPassword, PDO::PARAM_STR);
+    $stmt->execute();
+    $rowsChanged = $stmt->rowCount();
+    $stmt->closeCursor();
+    return $rowsChanged;
+  }

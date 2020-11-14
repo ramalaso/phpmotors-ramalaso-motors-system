@@ -159,6 +159,21 @@ small {
   font-weight: bold;
 }
 
+.logged {
+  color: red;
+}
+
+.material-icons {
+  color: blue;
+}
+
+#inventoryDisplay {
+  width: 100%;
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
+
 @media screen and (min-width: 680px) {
   body {
     max-width: 960px;
