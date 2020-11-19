@@ -23,3 +23,12 @@ function buildClassificationList($classifications){
     $classificationList .= '</select>'; 
     return $classificationList; 
    }
+
+   function buildNavigation($classifications) { 
+    $navList = '<ul>';
+    $navList .= "<li> <a href='/phpmotors/vehicles/?action=classification&classificationName="
+    .urlencode($classification['classificationName']).
+    "' title='View our $classification[classificationName] lineup of vehicles'>$classification[classificationName]</a> </li>";
+    $navList.='</ul>';
+    return $navList;
+}
