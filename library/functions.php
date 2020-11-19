@@ -26,7 +26,7 @@ function buildClassificationList($classifications){
 
    function buildNavigation($classifications) { 
     $navList = '<ul>';
-    $navList .= "<li> <a href='/phpmotors/vehicles/?action=classification&classificationName="
+    $navList .= "<li> <a href='/vehicles/?action=classification&classificationName="
     .urlencode($classification['classificationName']).
     "' title='View our $classification[classificationName] lineup of vehicles'>$classification[classificationName]</a> </li>";
     $navList.='</ul>';
