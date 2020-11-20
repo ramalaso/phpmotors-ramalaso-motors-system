@@ -19,9 +19,9 @@
     </nav>
     <main>
     <h1> <?php if(isset($vehicleData['invMake'])) {echo "$vehicleData[invMake]";} ?> </h1>
-    <p> <?php if(isset($vehicleData['invDescription'])) {echo "$vehicleData[invDescription]";} ?></p>
-   <p> <?php if(isset($vehicleData['invPrice'])) {echo "$vehicleData[invPrice]";} ?></p>
-   <p> <?php if(isset($vehicleData['invModel'])) {echo "$vehicleData[invModel]";} ?></p>
+    <h2> <?php if(isset($vehicleData['invDescription'])) {echo "$vehicleData[invDescription]";} ?></h2>
+   <h2> <?php if(isset($vehicleData['invPrice'])) {echo "$vehicleData[invPrice]";} ?></h2>
+   <h2> <?php if(isset($vehicleData['invModel'])) {echo "$vehicleData[invModel]";} ?></h2>
    
     </main>
     <footer>
