@@ -15,13 +15,14 @@
       <?php echo $navList; ?>
       </nav>
       <main>
-      <h1><?php echo $classificationName; ?> vehicles</h1>
-      <?php if(isset($message)){
-        echo $message; }
-        ?>
-        <?php if(isset($vehicleDisplay)){
-        echo $vehicleDisplay;
-        } ?>
+          <h1><?php echo $classificationName; ?> vehicles</h1>
+          <?php if(isset($message)){
+          echo $message; }
+          ?>
+          <?php if(isset($vehicleDisplay)){
+          echo $vehicleDisplay;
+          } ?>
+      
       </main>
       <footer>
       <?php require $_SERVER['DOCUMENT_ROOT'].'/snippets/footer.php'?>
