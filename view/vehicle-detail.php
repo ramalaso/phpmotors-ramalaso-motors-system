@@ -22,6 +22,7 @@
     <h2> <?php if(isset($vehicleData['invDescription'])) {echo "$vehicleData[invDescription]";} ?></h2>
    <h2> <?php if(isset($vehicleData['invPrice'])) {echo "$vehicleData[invPrice]";} ?></h2>
    <h2> <?php if(isset($vehicleData['invModel'])) {echo "$vehicleData[invModel]";} ?></h2>
+   <img src='<?php if(isset($vehicleData['invThumbnail'])) {echo "$vehicleData[invThumbnail]";} ?>' />
    
     </main>
     <footer>
