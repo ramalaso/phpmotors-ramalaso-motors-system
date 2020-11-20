@@ -224,7 +224,15 @@ require_once '../model/vehicle-model.php';
       }
       include '../view/classification.php';
       break;
+    case 'vehicleDetails':
+      $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+      $vehicleData = getInvItemInfo($invId);
+      $_SESSION['vehicleData'] = $vehicleData;
+      include '../view/vehicle-detail.php';
+      break;
     default:
       include '../view/home.php';
       break;
+   
+    
  }

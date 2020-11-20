@@ -39,7 +39,7 @@ function buildVehiclesDisplay($vehicles){
      $dv .= '<li>';
      $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
      $dv .= '<hr>';
-     $dv .= "<h2><a href='/'>$vehicle[invMake] $vehicle[invModel]</a></h2>";
+     $dv .= "<h2><a href='/vehicles/index.php?action=vehicleDetails&id=$vehicle[invId]' >$vehicle[invMake] $vehicle[invModel]</a></h2>";
      $dv .= "<span>$vehicle[invPrice]</span>";
      $dv .= '</li>';
     }
